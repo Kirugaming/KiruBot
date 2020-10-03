@@ -6,13 +6,12 @@ module.exports = {
 		if (!message.mentions.users.size) {
 			return message.reply('you need to tag a user in order to kick them!');
 		}
-		const member = message.mentions.members.first();
-		const taggedUser = message.mentions.users.first();
+		const taggedUser = message.mentions.members.first();
 
-		if (member.hasPermission('ADMINISTRATOR') || member.hasPermission('KICK_MEMBERS')
+		if (message.member.hasPermission('KICK_MEMBERS')
 		) {
-		// kick
-			member.kick();
+			// kick
+			taggedUser.kick();
 
 			// send message after @ has been kicked
 			message.channel.send(`Kicked <@${taggedUser.id}>`);
