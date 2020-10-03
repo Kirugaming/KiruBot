@@ -117,3 +117,5 @@ dist
 
 # files
 /config.json
+userdata.json
+.gitignore
