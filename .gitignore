@@ -117,10 +117,3 @@ dist
 
 # files
 /config.json
-/.eslintrc.json
-/.gitignore
-/userdata.json
-.eslintrc.json
-.gitignore
-package-lock.json
-package.json

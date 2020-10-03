@@ -11,7 +11,7 @@ module.exports = {
 
 		if (member.hasPermission('ADMINISTRATOR') || member.hasPermission('BAN_MEMBERS')
 		) {
-			// banned
+		// banned
 			message.guild.members.ban(taggedUser);
 
 
