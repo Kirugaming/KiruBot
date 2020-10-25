@@ -4,6 +4,12 @@ const Discord = require('discord.js');
 const sequelize = new Sequelize('database', 'username', 'password', {
     host: 'localhost',
     dialect: 'mariadb',
+    dialectOptions: {
+        timezone: 'Etc/GMT0',
+        username: 'username',
+        password: 'password',
+    },
+    logging: false,
 });
 
 const Users = require('./models/Users')(sequelize, Sequelize.DataTypes);
