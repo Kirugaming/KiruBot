@@ -1,11 +1,8 @@
 const fs = require('fs');
-// require the discord.js module
 const Discord = require('discord.js');
-
 const { prefix, token } = require('./config.json');
-
-// create a new Discord client
 const client = new Discord.Client();
+const { Users, currency } = require('./dbObjects');
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -22,16 +19,17 @@ const cooldowns = new Discord.Collection();
 
 // when the client is ready, run this code
 // this event will only trigger one time after logging in
-client.once('ready', () => {
+client.once('ready', async () => {
+	const storedBalances = await Users.findAll();
+	storedBalances.forEach(b => currency.set(b.user_id, b));
 	console.log('Ready!');
 });
 
-client.on('message', message => {
+client.on('message', async message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
-
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
@@ -67,7 +65,6 @@ client.on('message', message => {
 			return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
 		}
 	}
-
 	timestamps.set(message.author.id, now);
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
@@ -79,6 +76,8 @@ client.on('message', message => {
 		message.reply('there was an error trying to execute that command!');
 	}
 });
+
+module.exports = { client };
 
 // login to Discord with your app's token
 client.login(token);

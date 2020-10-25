@@ -119,3 +119,6 @@ dist
 /config.json
 userdata.json
 .gitignore
+package-lock.json
+package.json
+.eslintrc.json

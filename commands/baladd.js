@@ -1,35 +1,23 @@
 /* eslint-disable indent */
-const fs = require("fs");
-const money = require('../userdata.json');
 module.exports = {
     name: 'baladd',
     description: 'Adds to users Balance',
+    guildOnly: true,
     execute(message, args) {
-        const user = message.mentions.members.first();
+        const { currency } = require('../dbObjects');
+        const transferTarget = message.mentions.users.first();
+        const transferAmount = parseInt(args[1]);
+        if (message.member.hasPermission('MANAGE_CHANNELS')) {
 
-        if (!args[1]) return message.reply("Specify amount to give.");
+            if (!args[1]) return message.reply("Specify amount to give.");
+            if (parseInt(args[1]) < 1) return message.reply("Cant give less than 1.");
 
-        if (parseInt(args[1]) < 1) return message.reply("Cant give less than 1.");
+            currency.add(transferTarget.id, transferAmount);
 
-        if (!money[user.id]) {
-
-            money[user.id] = {
-                name: (user.id).tag,
-                money: parseInt(args[1]),
-            };
-
-            fs.writeFile("./userdata.json", JSON.stringify(money), (err) => {
-                if (err) console.log(err);
-            });
+            return message.channel.send(`Successfully transferred ${args[1]} Bit(s) to <@${transferTarget.id}>. \n<@${transferTarget.id}>s current balance is ${currency.getBalance(message.author.id)} Bit(s).`);
         }
         else {
-            money[user.id].money += parseInt(args[1]);
-
-            fs.writeFile("./userdata.json", JSON.stringify(money), (err) => {
-                if (err) console.log(err);
-            });
+            return message.channel.send("You don't have perms for this");
         }
-
-        return message.channel.send(`You gave ${args[1]} banana bits to <@${user.id}>`);
     },
 };
