@@ -11,7 +11,8 @@ module.exports = {
 		const allowed_filetypes_img = ["png", "jpg", "gif", "webp", "bmp"];
 		const allowed_filetypes_vid = ["mp4", "avi"];
 
-		const channel = message.channels.get("425792208155967489");
+		const { client } = require('../index');
+		const channel = client.channels.cache.get("425792208155967489");
 		let args_unsplit = "";
 		for (const i in args) {
 			args_unsplit = args_unsplit + args[i] + " ";
@@ -80,7 +81,7 @@ module.exports = {
 
 						const embed = new Discord.MessageEmbed()
 							.setColor("#ff3355")
-							.setTitle(":bust_in_silhouette: Anonymous Confession #" + count)
+							.setTitle(":man_detective: Anonymous Confession #" + count)
 							.setDescription(args_unsplit)
 							.setImage(Attachment[0].url)
 							.setFooter("DM me >>confess (message) to confess.")
@@ -94,7 +95,7 @@ module.exports = {
 
 						const embed = new Discord.MessageEmbed()
 							.setColor("#ff3355")
-							.setTitle(":bust_in_silhouette: Anonymous Confession #" + count)
+							.setTitle(":man_detective: Anonymous Confession #" + count)
 							.setDescription(args_unsplit + "\n\n*There is a video attachment down this message.*")
 							.setFooter("DM me >>confess (message) to confess.")
 							.setTimestamp();
@@ -107,7 +108,7 @@ module.exports = {
 					else {
 						const embed = new Discord.MessageEmbed()
 							.setColor("#ff3355")
-							.setTitle(":bust_in_silhouette: Anonymous Confession #" + count)
+							.setTitle(":man_detective: Anonymous Confession #" + count)
 							.setDescription(args_unsplit)
 							.setFooter("DM me >>confess (message) to confess.")
 							.setTimestamp();
