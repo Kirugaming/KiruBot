@@ -12,7 +12,7 @@ module.exports = {
 		const allowed_filetypes_vid = ["mp4", "avi"];
 
 		const { client } = require('../index');
-		const channel = client.channels.cache.get("425792208155967489");
+		const channel = client.channels.cache.get("787788106757439518");
 		let args_unsplit = "";
 		for (const i in args) {
 			args_unsplit = args_unsplit + args[i] + " ";
@@ -84,7 +84,7 @@ module.exports = {
 							.setTitle(":man_detective: Anonymous Confession #" + count)
 							.setDescription(args_unsplit)
 							.setImage(Attachment[0].url)
-							.setFooter("DM me >>confess (message) to confess.")
+							.setFooter("DM me -confess (message) to confess.")
 							.setTimestamp();
 
 						channel.send(embed);
@@ -97,7 +97,7 @@ module.exports = {
 							.setColor("#ff3355")
 							.setTitle(":man_detective: Anonymous Confession #" + count)
 							.setDescription(args_unsplit + "\n\n*There is a video attachment down this message.*")
-							.setFooter("DM me >>confess (message) to confess.")
+							.setFooter("DM me -confess (message) to confess.")
 							.setTimestamp();
 
 						channel.send(embed);
@@ -110,7 +110,7 @@ module.exports = {
 							.setColor("#ff3355")
 							.setTitle(":man_detective: Anonymous Confession #" + count)
 							.setDescription(args_unsplit)
-							.setFooter("DM me >>confess (message) to confess.")
+							.setFooter("DM me -confess (message) to confess.")
 							.setTimestamp();
 
 						channel.send(embed);
@@ -120,7 +120,7 @@ module.exports = {
 						.setColor("#ff3355")
 						.setTitle("confession posted!")
 						.setDescription("Your confession with ID #" + count + " has been posted!")
-						.setFooter("DM me >>confess (message) to confess.")
+						.setFooter("DM me -confess (message) to confess.")
 						.setTimestamp();
 
 					message.channel.send(embed);
